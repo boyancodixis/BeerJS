@@ -36,12 +36,12 @@ export async function getServerSideProps() {
 
 const Beers = ({ data } : Beer) => (
   <Box className={roboto.className}>
-    <Typography>Beer JS</Typography>
+    <Typography align="center">Beer JS</Typography>
     {data.length === 0 ? <h1>No beers</h1> : (
       <Box className="beers_grid">
         {data.map((beer: Beer) => (
           <Box key={beer.id} className="beers">
-            <img src={beer.image_url} alt="beer_image" />
+            <Image width={200} height={200} loader={() => beer.image_url} src={beer.image_url} alt="beer_image" />
             <Typography className="beer_name">{beer.name}</Typography>
             <Typography>{beer.tagline}</Typography>
             <Typography>
