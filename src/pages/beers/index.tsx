@@ -3,116 +3,7 @@
 import { Roboto } from 'next/font/google';
 // import { useEffect, useState } from 'react';
 import axios from 'axios';
-
-type Beer = {
-  id: number,
-  name: string,
-  tagline: string,
-  first_brewed: string,
-  description: string,
-  image_url: string,
-  abv: number,
-  ibu: number,
-  target_fg: number,
-  target_og: number,
-  ebc:number,
-  srm:number,
-  ph:number,
-  attenuation_level: number,
-  volume: {
-    value: number,
-    unit: string
-  },
-  boil_volue: {
-    value: number,
-    unit: string
-  },
-  method: {
-    mash_temp: [{
-      temp: {
-        value: number,
-        unit: string
-      },
-      duration: number,
-    },
-    ],
-    fermantation: {
-      temp: {
-        value: number,
-        unit: string
-      }
-    },
-    twist: null;
-  },
-  ingredients: {
-    malt: [{
-      name: string,
-      amount: {
-        value: number,
-        unit: string
-      },
-    },
-    {
-      name: string,
-      amount: {
-        value: number,
-        unit: string
-      },
-    },
-    {
-      name: string,
-      amount: {
-        value: number,
-        unit: string
-      },
-    },
-    ],
-    hops: [
-      {
-        name: string,
-        amount: {
-          value: number,
-          unit: string
-        }
-        add: string,
-        attribute: string,
-      },
-      {
-        name: string,
-        amount: {
-          value: number,
-          unit: string
-        }
-        add: string,
-        attribute: string
-      },
-      {
-        name: string,
-        amount: {
-          value: number,
-          unit: string
-        }
-        add: string,
-        attribute: string
-      },
-      {
-        name: string,
-        amount: {
-          value: number,
-          unit: string
-        }
-        add: string,
-        attribute: string
-      },
-    ],
-    yeast: string
-  },
-  food_pairing: [
-    string,
-  ],
-  brewers_tips: string,
-  contributed_by: string
-};
+import Beer from '@/types';
 
 const roboto = Roboto({
   weight: '400',
@@ -120,13 +11,28 @@ const roboto = Roboto({
 });
 
 export async function getServerSideProps() {
+  let beerData = [];
   const beerUrl = 'https://api.punkapi.com/v2/beers';
-  const beerData = await axios({
-    method: 'get',
-    url: beerUrl,
-  });
+  // const beerData = await axios({
+  //   method: 'get',
+  //   url: beerUrl,
+  // }).catch((error) => {
+  //   if (error.response) {
+  //     console.log(error.tojS);
+  //   }
+  // });
+  try {
+    beerData = await axios.get(beerUrl);
+  } catch (error) {
+    console.error(error);
+  }
+
   let data = [];
-  data = beerData.data;
+  if (beerData.length === 0) {
+    data = [];
+  } else {
+    data = beerData.data;
+  }
 
   return {
     props: {
@@ -138,20 +44,22 @@ export async function getServerSideProps() {
 
 const Beers = ({ data } : Beer) => (
   <div className={roboto.className}>
-    <h1>Beer page</h1>
-    <div className="beers_grid">
-      {data.splice(1, 10).map((beer: Beer) => (
-        <div key={beer.id} className="beers">
-          <img src={beer.image_url} alt="beer_image" />
-          <h1 className="beer_name">{beer.name}</h1>
-          <h2>{beer.tagline}</h2>
-          <h3>
-            {beer.abv}
-            %
-          </h3>
-        </div>
-      ))}
-    </div>
+    <h1>Beer JS</h1>
+    {data.length === 0 ? <h1>No beers</h1> : (
+      <div className="beers_grid">
+        {data.map((beer: Beer) => (
+          <div key={beer.id} className="beers">
+            <img src={beer.image_url} alt="beer_image" />
+            <h1 className="beer_name">{beer.name}</h1>
+            <h2>{beer.tagline}</h2>
+            <h3>
+              {beer.abv}
+              %
+            </h3>
+          </div>
+        ))}
+      </div>
+    )}
   </div>
 );
 export default Beers;
