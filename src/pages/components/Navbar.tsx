@@ -1,9 +1,7 @@
-import {
-  AppBar,
-  CssBaseline,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import CssBaseline from '@mui/material/CssBaseline';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 
 const Navbar = () => (
   <CssBaseline>

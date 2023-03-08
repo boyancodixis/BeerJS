@@ -1,4 +1,5 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import createTheme from '@mui/material/styles/createTheme';
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import type { AppProps } from 'next/app';
 import Layout from './components/Layout';
 
