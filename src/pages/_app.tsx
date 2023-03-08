@@ -1,5 +1,3 @@
-import '@/styles/globals.css';
-import { grey } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
 import Layout from './components/Layout';
