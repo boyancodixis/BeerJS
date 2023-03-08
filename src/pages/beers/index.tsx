@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import axios from 'axios';
 import { get } from 'lodash';
-import { Typography, Box, TextField } from '@mui/material';
-import Grid from '@mui/material/Grid';
+import {
+  CardContent, CardActions, Button, Grid, CardMedia, Card, Typography, Box, TextField,
+} from '@mui/material';
+
 import Beer from '@/types';
 
 // todo : layout;
@@ -39,26 +41,25 @@ const Beers = ({ data } : Beer) => (
         spacing={{ xs: 2, md: 4 }}
       >
         {data.map((beer: Beer) => (
-          <Grid item xs={2} sm={4} md={4} key={beer.id}>
-            <Box
-              sx={{
-                padding: '1rem',
-                border: 1,
-                borderRadius: '15px',
-                textAlign: 'center',
-                width: '12rem',
-                boxShadow: 3,
-              }}
-              key={beer.id}
+          <Grid item key={beer.id} xs={12} sm={6} md={4}>
+            <Card
+              sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
             >
-              <Image width={40} height={100} unoptimized loader={() => beer.image_url} src={beer.image_url} alt="beer_image" />
-              <Typography>{beer.name}</Typography>
-              <Typography>{beer.tagline}</Typography>
-              <Typography>
-                {beer.abv}
-                %
-              </Typography>
-            </Box>
+              <Image loader={() => beer.image_url} width={50} height={150} src={beer.image_url} alt="beer" />
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Heading
+                </Typography>
+                <Typography>
+                  This is a media card. You can use this section to describe the
+                  content.
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">View</Button>
+                <Button size="small">Edit</Button>
+              </CardActions>
+            </Card>
           </Grid>
         ))}
       </Grid>

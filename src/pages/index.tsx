@@ -12,6 +12,9 @@ const Home = () => (
         <ListItem>
           <Link href="/my-account">My Account</Link>
         </ListItem>
+        <ListItem>
+          <Link href="/test">test</Link>
+        </ListItem>
       </List>
     </Box>
   </Box>
