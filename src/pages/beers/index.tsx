@@ -1,9 +1,10 @@
-import { Box, width } from '@mui/system';
+import Image from 'next/image';
+import axios from 'axios';
+import { get } from 'lodash';
+import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import axios from 'axios';
 import Beer from '@/types';
-import Image from 'next/image';
 
 export async function getServerSideProps() {
   let beerData = [];
@@ -14,12 +15,7 @@ export async function getServerSideProps() {
     console.error(error);
   }
 
-  let data = [];
-  if (beerData.length === 0) {
-    data = [];
-  } else {
-    data = beerData.data;
-  }
+  const data = get(beerData, 'data', []);
 
   return {
     props: {
@@ -31,7 +27,7 @@ export async function getServerSideProps() {
 
 const Beers = ({ data } : Beer) => (
   <Box sx={{ color: 'primary.main' }}>
-    <Typography align="center">Beer JS</Typography>
+    <Typography align="center">Beer</Typography>
     {data.length === 0 ? <Typography>No Beers</Typography> : (
       <Grid alignItems="center" container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {data.map((beer: Beer) => (
