@@ -31,10 +31,10 @@ const theme = createTheme({
 });
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <Layout>
-    <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
+    <Layout>
       <Component {...pageProps} />
-    </ThemeProvider>
-  </Layout>
+    </Layout>
+  </ThemeProvider>
 );
 export default App;
