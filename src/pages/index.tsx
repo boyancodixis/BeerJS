@@ -1,12 +1,12 @@
 import Link from 'next/Link';
 import { Box } from '@mui/system';
-import { ListItem, List } from '@mui/material';
+import { List, ListItem } from '@mui/material';
 
 const Home = () => (
   <Box>
-    <Box className="landing">
-      <List className="menu">
-        <ListItem className="beers_menu">
+    <Box>
+      <List>
+        <ListItem>
           <Link href="/beers">Beers</Link>
         </ListItem>
         <ListItem>
