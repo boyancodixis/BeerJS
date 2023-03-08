@@ -1,5 +1,8 @@
 import {
-  CssBaseline, Typography, Toolbar, AppBar,
+  AppBar,
+  CssBaseline,
+  Toolbar,
+  Typography,
 } from '@mui/material';
 
 const Navbar = () => (
