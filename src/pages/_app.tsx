@@ -1,6 +1,5 @@
-import createTheme from '@mui/material/styles/createTheme';
-import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import type { AppProps } from 'next/app';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Layout from './components/Layout';
 
 const theme = createTheme({
@@ -32,10 +31,10 @@ const theme = createTheme({
 });
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <ThemeProvider theme={theme}>
-    <Layout>
+  <Layout>
+    <ThemeProvider theme={theme}>
       <Component {...pageProps} />
-    </Layout>
-  </ThemeProvider>
+    </ThemeProvider>
+  </Layout>
 );
 export default App;

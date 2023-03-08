@@ -9,8 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-
-import { Beer } from '@/types';
+import type { Beer } from '@/types';
 
 // todo : layout;
 
@@ -50,7 +49,7 @@ const Beers = ({ data } : Beer) => (
           <Card
             sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
           >
-            <Image loader={() => beer.image_url} width={50} height={150} src={beer.image_url} alt="beer" />
+            <Image width={50} height={150} src={beer.image_url} alt="beer" />
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography gutterBottom variant="h4" component="h2">
                 {beer.name}
