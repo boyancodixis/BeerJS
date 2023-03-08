@@ -1,14 +1,9 @@
-import { Roboto } from 'next/font/google';
+import { Box, width } from '@mui/system';
+import { Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import axios from 'axios';
 import Beer from '@/types';
-import { Box } from '@mui/system';
 import Image from 'next/image';
-import { Typography } from '@mui/material';
-
-const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-});
 
 export async function getServerSideProps() {
   let beerData = [];
@@ -35,22 +30,33 @@ export async function getServerSideProps() {
 }
 
 const Beers = ({ data } : Beer) => (
-  <Box className={roboto.className}>
+  <Box sx={{ color: 'primary.main' }}>
     <Typography align="center">Beer JS</Typography>
-    {data.length === 0 ? <h1>No beers</h1> : (
-      <Box className="beers_grid">
+    {data.length === 0 ? <Typography>No Beers</Typography> : (
+      <Grid alignItems="center" container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {data.map((beer: Beer) => (
-          <Box key={beer.id} className="beers">
-            <Image width={200} height={200} loader={() => beer.image_url} src={beer.image_url} alt="beer_image" />
-            <Typography className="beer_name">{beer.name}</Typography>
-            <Typography>{beer.tagline}</Typography>
-            <Typography>
-              {beer.abv}
-              %
-            </Typography>
-          </Box>
+          <Grid item xs={2} sm={4} md={4} key={beer.id}>
+            <Box
+              sx={{
+                padding: '1rem',
+                border: 1,
+                borderRadius: '15px',
+                textAlign: 'center',
+                width: '12rem',
+              }}
+              key={beer.id}
+            >
+              <Image width={40} height={100} unoptimized loader={() => beer.image_url} src={beer.image_url} alt="beer_image" />
+              <Typography>{beer.name}</Typography>
+              <Typography>{beer.tagline}</Typography>
+              <Typography>
+                {beer.abv}
+                %
+              </Typography>
+            </Box>
+          </Grid>
         ))}
-      </Box>
+      </Grid>
     )}
   </Box>
 );

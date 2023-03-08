@@ -3,6 +3,7 @@ import {
 } from 'next/document';
 
 const Document = () => (
+
   <Html lang="en">
     <Head />
     <body>
@@ -10,6 +11,7 @@ const Document = () => (
       <NextScript />
     </body>
   </Html>
+
 );
 
 export default Document;
