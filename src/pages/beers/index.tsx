@@ -1,18 +1,16 @@
 import Image from 'next/image';
 import axios from 'axios';
 import { get } from 'lodash';
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Grid,
-  TextField,
-  Typography,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
-import Beer from '@/types';
+import { Beer } from '@/types';
 
 // todo : layout;
 
