@@ -1,12 +1,19 @@
 import '@/styles/globals.css';
-import { red, green, grey } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
+import Layout from './components/Layout';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: grey[700],
+      main: '#03a9f4',
+    },
+    secondary: {
+      main: '#03a9f4',
+    },
+    background: {
+      default: '#20c34',
     },
   },
   typography: {
@@ -26,8 +33,10 @@ const theme = createTheme({
 });
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <ThemeProvider theme={theme}>
-    <Component {...pageProps} />
-  </ThemeProvider>
+  <Layout>
+    <ThemeProvider theme={theme}>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  </Layout>
 );
 export default App;

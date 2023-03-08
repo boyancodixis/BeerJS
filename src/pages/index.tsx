@@ -1,5 +1,4 @@
 import Link from 'next/Link';
-import Head from 'next/head';
 import { Box } from '@mui/system';
 import { ListItem, List } from '@mui/material';
 

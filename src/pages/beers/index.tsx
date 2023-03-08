@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import axios from 'axios';
 import { get } from 'lodash';
-import { Box } from '@mui/system';
-import { Typography } from '@mui/material';
+import { Typography, Box, TextField } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Beer from '@/types';
+
+// todo : layout;
 
 export async function getServerSideProps() {
   let beerData = [];
@@ -26,10 +27,17 @@ export async function getServerSideProps() {
 }
 
 const Beers = ({ data } : Beer) => (
-  <Box sx={{ color: 'primary.main' }}>
-    <Typography align="center">Beer</Typography>
+  <Box sx={{ color: 'primary.main', alignContent: 'center' }}>
+    <Typography variant="h3" align="center">Beers</Typography>
+    <TextField sx={{ color: 'white' }} id="outlined-basic" label="Outlined" variant="outlined" />
     {data.length === 0 ? <Typography>No Beers</Typography> : (
-      <Grid alignItems="center" container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid
+        alignItems="center"
+        justifyContent="center"
+        container
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        spacing={{ xs: 2, md: 4 }}
+      >
         {data.map((beer: Beer) => (
           <Grid item xs={2} sm={4} md={4} key={beer.id}>
             <Box
@@ -39,6 +47,7 @@ const Beers = ({ data } : Beer) => (
                 borderRadius: '15px',
                 textAlign: 'center',
                 width: '12rem',
+                boxShadow: 3,
               }}
               key={beer.id}
             >
