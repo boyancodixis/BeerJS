@@ -47,17 +47,20 @@ const Beers = ({ data } : Beer) => (
             >
               <Image loader={() => beer.image_url} width={50} height={150} src={beer.image_url} alt="beer" />
               <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Heading
+                <Typography gutterBottom variant="h4" component="h2">
+                  {beer.name}
                 </Typography>
-                <Typography>
-                  This is a media card. You can use this section to describe the
-                  content.
+                <Typography variant="h6">
+                  {beer.tagline}
+                </Typography>
+                <Typography variant="h6">
+                  {beer.abv}
+                  {' '}
+                  %
                 </Typography>
               </CardContent>
               <CardActions>
                 <Button size="small">View</Button>
-                <Button size="small">Edit</Button>
               </CardActions>
             </Card>
           </Grid>
