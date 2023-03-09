@@ -9,15 +9,15 @@ import Paper from '@mui/material/Paper';
 
 const TableView = ({ beers }) => (
   <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
-    <TableContainer component={Paper}>
+    <TableContainer sx={{ boxShadow: 3 }} component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="right">ID</TableCell>
-            <TableCell align="center">Name&nbsp;(g)</TableCell>
-            <TableCell align="right">Abv&nbsp;(g)</TableCell>
-            <TableCell align="right">First Brewed&nbsp;(g)</TableCell>
-            <TableCell align="right">Contributed By&nbsp;(g)</TableCell>
+            <TableCell align="center">Name</TableCell>
+            <TableCell align="right">Abv</TableCell>
+            <TableCell align="right">First Brewed</TableCell>
+            <TableCell align="right">Contributed By</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
