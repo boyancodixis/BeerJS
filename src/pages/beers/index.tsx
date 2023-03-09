@@ -7,11 +7,10 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
+import Link from 'next/link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import type { Beer } from '@/types';
-
-// todo : layout;
 
 export async function getServerSideProps() {
   let beerData = [];
@@ -64,7 +63,19 @@ const Beers = ({ data } : Beer) => (
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">View</Button>
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: 'red',
+                  fontSize: 30,
+                  fontStyle: 'italic',
+                }}
+                href={`/beers/${beer.id}`}
+              >
+                <Button sx={{ textDecoration: 'none' }}>
+                  View
+                </Button>
+              </Link>
             </CardActions>
           </Card>
         </Grid>
