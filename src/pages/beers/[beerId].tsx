@@ -12,7 +12,7 @@ import type { Beer } from '@/types';
 const BeerDetails = ({ beer } : Beer) => (
 
   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-    <Card sx={{ maxWidth: 345, marginTop: '2rem' }}>
+    <Card sx={{ maxWidth: 345, marginTop: '2rem', marginBottom: '2rem' }}>
       <CardActionArea>
         <CardMedia
           component="img"

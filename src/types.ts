@@ -17,7 +17,7 @@ export type Beer = {
     value: number,
     unit: string
   },
-  boil_volue: {
+  boil_volume: {
     value: number,
     unit: string
   },
