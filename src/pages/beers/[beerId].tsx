@@ -49,7 +49,6 @@ const Beer = ({ beer } : Beer) => (
 
 export async function getStaticProps({ params }) {
   let results = [];
-
   const beerIdUrl = `https://api.punkapi.com/v2/beers/${params.beerId}`;
   try {
     results = await axios.get(beerIdUrl);
@@ -65,22 +64,9 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export async function getStaticPaths() {
-  const allBeersUrl = 'https://api.punkapi.com/v2/beers';
-
-  let results = [];
-  results = await axios.get(allBeersUrl);
-
-  const beers = get(results, 'data', []);
-
-  return {
-    paths: beers.map((beer: Beer) => ({
-      params: {
-        beerId: beer.id.toString(),
-      },
-    })),
-    fallback: false,
-  };
-}
+export const getStaticPaths = async () => ({
+  paths: [],
+  fallback: 'blocking',
+});
 
 export default Beer;
