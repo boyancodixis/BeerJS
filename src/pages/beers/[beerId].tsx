@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import type { Beer } from '@/types';
 
-const Beer = ({ beer } : Beer) => (
+const BeerDetails = ({ beer } : Beer) => (
 
   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
     <Card sx={{ maxWidth: 345, marginTop: '2rem' }}>
@@ -69,4 +69,4 @@ export const getStaticPaths = async () => ({
   fallback: 'blocking',
 });
 
-export default Beer;
+export default BeerDetails;
