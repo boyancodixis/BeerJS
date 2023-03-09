@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 
 const Navbar = () => (
   <CssBaseline>
-
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" color="inherit" margin={0}>
