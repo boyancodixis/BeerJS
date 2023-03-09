@@ -2,14 +2,14 @@ import Image from 'next/image';
 import axios from 'axios';
 import { get } from 'lodash';
 import Box from '@mui/system/Box';
-import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import CardActionArea from '@mui/material/CardActionArea';
+import Typography from '@mui/material/Typography';
 import type { Beer } from '@/types';
 
-const BeerId = ({ beer } : Beer) => (
+const Beer = ({ beer } : Beer) => (
 
   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
     <Card sx={{ maxWidth: 345, marginTop: '2rem' }}>
@@ -51,9 +51,12 @@ export async function getStaticProps({ params }) {
   let results = [];
 
   const beerIdUrl = `https://api.punkapi.com/v2/beers/${params.beerId}`;
-  results = await axios.get(beerIdUrl);
+  try {
+    results = await axios.get(beerIdUrl);
+  } catch (error) {
+    console.log(error);
+  }
   const beer = get(results, 'data', []);
-  console.log(results);
 
   return {
     props: {
@@ -80,4 +83,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default BeerId;
+export default Beer;
