@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import type { Beer } from '@/types';
+import type { Beer, ViewType } from '@/types';
 import { BeerView } from '@/constants';
 import GridView from '../../components/GridView';
 import TableView from '../../components/TableView';
@@ -32,7 +32,7 @@ export async function getServerSideProps() {
 }
 
 const Beers = ({ data } : Beer) => {
-  const [view, setView] = useState(BeerView.grid);
+  const [view, setView] = useState<ViewType>(BeerView.grid);
 
   function triggerTableView() {
     if (view === BeerView.grid) {
@@ -73,7 +73,6 @@ const Beers = ({ data } : Beer) => {
         </Box>
       </Box>
       {view === 'grid' ? <GridView beers={data} /> : <TableView beers={data} />}
-      {/* {view ? <TableView beers={data} /> : <GridView beers={data} />} */}
       {data.length === 0 && <Typography>No Beers</Typography>}
     </Box>
   );

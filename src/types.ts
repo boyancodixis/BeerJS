@@ -107,3 +107,5 @@ export type Beer = {
   brewers_tips: string,
   contributed_by: string
 };
+
+export type ViewType = 'grid' | 'table';
