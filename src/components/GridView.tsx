@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import type { Beer } from '@/types';
 
-const GridView = ({ beers } : Beer) => (
+const GridView = ({ beers } : Beer[]) => (
   <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
     <Box sx={{ display: 'flex' }} />
     <Grid

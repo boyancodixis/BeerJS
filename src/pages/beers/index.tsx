@@ -31,17 +31,18 @@ export async function getServerSideProps() {
   };
 }
 
-const Beers = ({ data } : Beer) => {
+const Beers = ({ data } : Beer[]) => {
   const [view, setView] = useState<ViewType>(BeerView.grid);
 
   const triggerTableView = () => {
     if (view === BeerView.grid) {
       setView(BeerView.table);
-    } else if (view === BeerView.table) {
+    } else {
       setView(BeerView.grid);
     }
-    // console.log(view);
   };
+
+  console.log(data);
 
   return (
     <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
@@ -68,8 +69,8 @@ const Beers = ({ data } : Beer) => {
             Grid View
           </Typography>
           <FormControlLabel
-            onClick={() => triggerTableView()}
-            control={<ViewSwitch sx={{ m: 1 }} />}
+            onClick={triggerTableView}
+            control={<ViewSwitch sx={{ m: 1, ml: 3, mb: 3 }} />}
             label=""
           />
           <Typography sx={{ marginTop: '.5rem' }}>Table View</Typography>

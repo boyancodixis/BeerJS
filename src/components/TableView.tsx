@@ -11,7 +11,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import type { Beer } from '@/types';
 
-const TableView = ({ beers }) => (
+const TableView = ({ beers } : Beer[]) => (
   <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
     <TableContainer sx={{ boxShadow: 3 }} component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
