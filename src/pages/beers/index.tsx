@@ -32,17 +32,15 @@ export async function getServerSideProps() {
 }
 
 const Beers = ({ data } : Beer) => {
-  const [view, setView] = useState<ViewType>(BeerView.grid);
+  const [view, setView] = useState(BeerView.grid);
 
-  function triggerTableView() {
+  const triggerTableView = () => {
     if (view === BeerView.grid) {
       setView(BeerView.table);
     } else {
       setView(BeerView.grid);
     }
-
-    console.log(view);
-  }
+  };
 
   return (
     <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
@@ -72,7 +70,7 @@ const Beers = ({ data } : Beer) => {
           />
         </Box>
       </Box>
-      {view === 'grid' ? <GridView beers={data} /> : <TableView beers={data} />}
+      {view === 'table' ? <TableView beers={data} /> : <GridView beers={data} />}
       {data.length === 0 && <Typography>No Beers</Typography>}
     </Box>
   );
