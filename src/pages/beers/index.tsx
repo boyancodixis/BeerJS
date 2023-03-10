@@ -36,13 +36,9 @@ const Beers = ({ data } : Beer) => {
 
   const triggerTableView = () => {
     if (view === BeerView.grid) {
-      console.log('i was grid');
       setView(BeerView.table);
-      console.log('im now table');
     } else if (view === BeerView.table) {
-      console.log('i was table');
       setView(BeerView.grid);
-      console.log('im now grid');
     }
     // console.log(view);
   };
