@@ -17,7 +17,7 @@ export type Beer = {
     value: number,
     unit: string
   },
-  boil_volue: {
+  boil_volume: {
     value: number,
     unit: string
   },
@@ -107,3 +107,5 @@ export type Beer = {
   brewers_tips: string,
   contributed_by: string
 };
+
+export type ViewType = 'grid' | 'table';

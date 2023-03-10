@@ -12,7 +12,7 @@ import type { Beer } from '@/types';
 const BeerDetails = ({ beer } : Beer) => (
 
   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-    <Card sx={{ maxWidth: 345, marginTop: '2rem' }}>
+    <Card sx={{ maxWidth: 400, marginTop: '2rem', marginBottom: '2rem' }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -39,6 +39,11 @@ const BeerDetails = ({ beer } : Beer) => (
             {beer.abv}
             {' '}
             %
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            Goes great with:
+            {' '}
+            {beer.food_pairing.join(' , ')}
           </Typography>
         </CardContent>
       </CardActionArea>
