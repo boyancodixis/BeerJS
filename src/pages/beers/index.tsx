@@ -35,11 +35,13 @@ const Beers = ({ data } : Beer) => {
   const [view, setView] = useState(BeerView.grid);
 
   const triggerTableView = () => {
-    if (view === BeerView.grid) {
-      setView(BeerView.table);
-    } else {
+    if (view === BeerView.table) {
       setView(BeerView.grid);
+    } else {
+      setView(BeerView.table);
     }
+
+    console.log(view);
   };
 
   return (
@@ -70,7 +72,7 @@ const Beers = ({ data } : Beer) => {
           />
         </Box>
       </Box>
-      {view === 'table' ? <TableView beers={data} /> : <GridView beers={data} />}
+      {view === 'grid' ? <GridView beers={data} /> : <TableView beers={data} />}
       {data.length === 0 && <Typography>No Beers</Typography>}
     </Box>
   );
