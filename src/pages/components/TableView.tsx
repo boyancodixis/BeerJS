@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import type { Beer } from '@/types';
 
 const TableView = ({ beers }) => (
   <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
@@ -22,7 +23,7 @@ const TableView = ({ beers }) => (
         </TableHead>
         <TableBody>
           {beers.map((beer:Beer) => (
-            <TableRow key={beer.name}>
+            <TableRow key={beer.id}>
               <TableCell align="right">{beer.id}</TableCell>
               <TableCell align="center">{beer.name}</TableCell>
               <TableCell align="right">{beer.abv}</TableCell>

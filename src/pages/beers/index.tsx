@@ -12,6 +12,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import type { Beer } from '@/types';
+import GridView from '../components/GridView';
 import TableView from '../components/TableView';
 
 export async function getServerSideProps() {
@@ -33,10 +34,19 @@ export async function getServerSideProps() {
   };
 }
 const Beers = ({ data } : Beer) => {
-  const [tableView, setTableView] = useState(true);
+  const [tableView, setTableView] = useState(false);
+  const [gridView, setGridView] = useState(true);
 
   function triggerTableView() {
     setTableView(!tableView);
+  }
+
+  function triggerGridView() {
+    setGridView(!gridView);
+  }
+
+  if (tableView === false && gridView === false) {
+    setGridView(true);
   }
 
   return (
@@ -59,58 +69,12 @@ const Beers = ({ data } : Beer) => {
         <Typography variant="h5">
           Choose a view
         </Typography>
-        <Button variant="contained">Grid</Button>
+        <Button variant="contained" onClick={() => triggerGridView()}>Grid</Button>
         <Button variant="contained" onClick={() => triggerTableView()} sx={{ marginTop: '1rem', marginBottom: '1rem' }}>Table</Button>
       </Box>
       {tableView && <TableView beers={data} />}
+      {gridView && <GridView beers={data} />}
       {data.length === 0 && <Typography>No Beers</Typography>}
-      <Grid
-        alignItems="center"
-        justifyContent="center"
-        container
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        spacing={{ xs: 2, md: 4 }}
-      >
-        {data.map((beer: Beer) => (
-          <Grid item key={beer.id} xs={12} sm={6} md={4}>
-            <Card
-              sx={{
-                height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', padding: '2rem', boxShadow: 3,
-              }}
-            >
-              <Image width={50} height={150} src={beer.image_url} alt="beer" />
-              <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
-                <Typography gutterBottom variant="h4" fontWeight="bold" component="h2">
-                  {beer.name}
-                </Typography>
-                <Typography variant="h6">
-                  {beer.tagline}
-                </Typography>
-                <Typography variant="h6">
-                  {beer.abv}
-                  {' '}
-                  %
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Link
-                  style={{
-                    textDecoration: 'none',
-                    color: 'red',
-                    fontSize: 30,
-                    fontStyle: 'italic',
-                  }}
-                  href={`/beers/${beer.id}`}
-                >
-                  <Button variant="outlined" sx={{ textDecoration: 'none' }}>
-                    Learn more
-                  </Button>
-                </Link>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
     </Box>
   );
 };
