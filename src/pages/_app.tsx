@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Layout from './components/Layout';
+import Layout from '../components/Layout';
 
 const theme = createTheme({
   palette: {

@@ -19,16 +19,16 @@ const GridView = ({ beers } : Beer) => (
       columns={{ xs: 4, sm: 8, md: 12 }}
       spacing={{ xs: 2, md: 4 }}
     >
-      {beers.map((beer: Beer) => (
+      {beers.slice(0, 10).map((beer: Beer) => (
         <Grid item key={beer.id} xs={12} sm={6} md={4}>
           <Card
             sx={{
-              height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', padding: '2rem', boxShadow: 3,
+              height: '30rem', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', padding: '2rem', boxShadow: 3,
             }}
           >
-            <Image width={50} height={150} src={beer.image_url} alt="beer" />
+            <Image width={50} height={190} src={beer.image_url} alt="beer" />
             <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
-              <Typography gutterBottom variant="h4" fontWeight="bold" component="h2">
+              <Typography gutterBottom variant="h5" fontWeight="bold" component="h2">
                 {beer.name}
               </Typography>
               <Typography variant="h6">

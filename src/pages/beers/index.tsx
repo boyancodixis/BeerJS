@@ -7,13 +7,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import type { Beer } from '@/types';
-import GridView from '../components/GridView';
-import TableView from '../components/TableView';
-import ViewSwitch from '../components/ViewSwitch';
+import GridView from '../../components/GridView';
+import TableView from '../../components/TableView';
+import ViewSwitch from '../../components/ViewSwitch';
 
 export async function getServerSideProps() {
   let beerData = [];
-  const beerUrl = 'https://api.punkapi.com/v2/beers';
+  const beerUrl = 'https://api.punkapi.com/v2/beers?per_page=80';
   try {
     beerData = await axios.get(beerUrl);
   } catch (error) {
@@ -65,9 +65,6 @@ const Beers = ({ data } : Beer) => {
           />
         </Box>
       </Box>
-      {/* {tableView && <TableView beers={data} />}
-      {gridView && <GridView beers={data} />} */}
-
       {tableView ? <TableView beers={data} /> : <GridView beers={data} />}
       {data.length === 0 && <Typography>No Beers</Typography>}
     </Box>

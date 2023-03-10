@@ -1,10 +1,13 @@
 import Box from '@mui/system/Box';
+import Link from 'next/link';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
+import TableFooter from '@mui/material/TableFooter';
+import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import type { Beer } from '@/types';
 
@@ -25,7 +28,7 @@ const TableView = ({ beers }) => (
           {beers.map((beer:Beer) => (
             <TableRow key={beer.id}>
               <TableCell align="right">{beer.id}</TableCell>
-              <TableCell align="center">{beer.name}</TableCell>
+              <TableCell align="center"><Link href={`/beers/${beer.id}`}>{beer.name}</Link></TableCell>
               <TableCell align="right">{beer.abv}</TableCell>
               <TableCell align="right">{beer.first_brewed}</TableCell>
               <TableCell align="right">{beer.contributed_by}</TableCell>
@@ -33,6 +36,9 @@ const TableView = ({ beers }) => (
           ))}
         </TableBody>
       </Table>
+      <TableFooter>
+        <TablePagination rowsPerPage={10} page={0} count={beers.length} />
+      </TableFooter>
     </TableContainer>
   </Box>
 
