@@ -37,7 +37,7 @@ const TableView = ({ beers }) => (
         </TableBody>
       </Table>
       <TableFooter>
-        <TablePagination rowsPerPage={10} page={0} count={beers.length} />
+        <TablePagination rowsPerPageOptions={[5, 10, 25]} page={0} count={beers.length} />
       </TableFooter>
     </TableContainer>
   </Box>

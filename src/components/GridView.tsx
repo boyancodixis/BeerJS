@@ -19,7 +19,7 @@ const GridView = ({ beers } : Beer) => (
       columns={{ xs: 4, sm: 8, md: 12 }}
       spacing={{ xs: 2, md: 4 }}
     >
-      {beers.slice(0, 10).map((beer: Beer) => (
+      {beers.map((beer: Beer) => (
         <Grid item key={beer.id} xs={12} sm={6} md={4}>
           <Card
             sx={{

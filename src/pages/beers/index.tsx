@@ -7,13 +7,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import type { Beer } from '@/types';
+import { BeerView } from '@/constants';
 import GridView from '../../components/GridView';
 import TableView from '../../components/TableView';
 import ViewSwitch from '../../components/ViewSwitch';
 
 export async function getServerSideProps() {
   let beerData = [];
-  const beerUrl = 'https://api.punkapi.com/v2/beers?per_page=80';
+  const beerUrl = 'https://api.punkapi.com/v2/beers?page=1&per_page=10';
   try {
     beerData = await axios.get(beerUrl);
   } catch (error) {
@@ -31,10 +32,16 @@ export async function getServerSideProps() {
 }
 
 const Beers = ({ data } : Beer) => {
-  const [tableView, setTableView] = useState(false);
+  const [view, setView] = useState(BeerView.grid);
 
   function triggerTableView() {
-    setTableView(!tableView);
+    if (view === BeerView.grid) {
+      setView(BeerView.table);
+    } else {
+      setView(BeerView.grid);
+    }
+
+    console.log(view);
   }
 
   return (
@@ -65,7 +72,8 @@ const Beers = ({ data } : Beer) => {
           />
         </Box>
       </Box>
-      {tableView ? <TableView beers={data} /> : <GridView beers={data} />}
+      {view === 'grid' ? <GridView beers={data} /> : <TableView beers={data} />}
+      {/* {view ? <TableView beers={data} /> : <GridView beers={data} />} */}
       {data.length === 0 && <Typography>No Beers</Typography>}
     </Box>
   );
