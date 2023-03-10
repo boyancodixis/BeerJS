@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import axios from 'axios';
 import { get } from 'lodash';
 import Box from '@mui/material/Box';
@@ -8,7 +9,6 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
-import Link from 'next/link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import type { Beer } from '@/types';
@@ -37,12 +37,7 @@ const Beers = ({ data } : Beer) => {
 
   function triggerTableView() {
     setTableView(!tableView);
-    console.log(tableView);
   }
-
-  // two buttons : table & grid. Only grid is true on load then if table is clicked set its state to
-  // true and set the grid to false. Both can't be false. If a view is clicked and its state
-  // is already true do ???.
 
   return (
     <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
