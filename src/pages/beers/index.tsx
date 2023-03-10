@@ -32,16 +32,19 @@ export async function getServerSideProps() {
 }
 
 const Beers = ({ data } : Beer) => {
-  const [view, setView] = useState(BeerView.grid);
+  const [view, setView] = useState<ViewType>(BeerView.grid);
 
   const triggerTableView = () => {
-    if (view === BeerView.table) {
-      setView(BeerView.grid);
-    } else {
+    if (view === BeerView.grid) {
+      console.log('i was grid');
       setView(BeerView.table);
+      console.log('im now table');
+    } else if (view === BeerView.table) {
+      console.log('i was table');
+      setView(BeerView.grid);
+      console.log('im now grid');
     }
-
-    console.log(view);
+    // console.log(view);
   };
 
   return (
@@ -61,15 +64,19 @@ const Beers = ({ data } : Beer) => {
         <Button>Search</Button>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', float: 'left' }}>
-        <Typography variant="h5">
+        <Typography variant="h5" mb={3}>
           Choose a view
         </Typography>
         <Box sx={{ display: 'flex' }}>
+          <Typography sx={{ marginTop: '.5rem', marginRight: '1rem' }}>
+            Grid View
+          </Typography>
           <FormControlLabel
             onClick={() => triggerTableView()}
             control={<ViewSwitch sx={{ m: 1 }} />}
-            label="Table View"
+            label=""
           />
+          <Typography sx={{ marginTop: '.5rem' }}>Table View</Typography>
         </Box>
       </Box>
       {view === 'grid' ? <GridView beers={data} /> : <TableView beers={data} />}
