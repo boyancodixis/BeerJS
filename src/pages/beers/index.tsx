@@ -18,17 +18,21 @@ const Beers = ({ data } : Beer[]) => {
   const [page, setPage] = useState(1);
   const [beers, setBeers] = useState<Beer[]>();
 
-  const beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
   const getBeers = async () => {
-    const allBeers = await axios.get(beerUrl);
-    setBeers(allBeers.data);
+    const beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
+    try {
+      const allBeers = await axios.get(beerUrl);
+      setBeers(allBeers.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     getBeers();
   }, [page]);
 
-  const handlePageChange = (e, p) => {
+  const handlePageChange = (e:object, p:number) => {
     setPage(p);
   };
 
@@ -75,11 +79,6 @@ const Beers = ({ data } : Beer[]) => {
       {view === 'grid' ? <GridView beerData={beers} /> : <TableView beerData={beers} />}
       {beers?.length === 0 && <Typography>No Beers</Typography>}
       <Pagination sx={{ display: 'flex', justifyContent: 'center' }} size="large" count={beers?.length} onChange={handlePageChange} />
-      <p>
-        page is
-        {' '}
-        {page}
-      </p>
     </Box>
   );
 };
