@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { get } from 'lodash';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Pagination from '@mui/material/Pagination';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import type { Beer, ViewType } from '@/types';
@@ -12,9 +13,10 @@ import GridView from '../../components/GridView';
 import TableView from '../../components/TableView';
 import ViewSwitch from '../../components/ViewSwitch';
 
+let beerUrl = 'https://api.punkapi.com/v2/beers?page=1&per_page=10';
+
 export async function getServerSideProps() {
   let beerData = [];
-  const beerUrl = 'https://api.punkapi.com/v2/beers?page=1&per_page=10';
   try {
     beerData = await axios.get(beerUrl);
   } catch (error) {
@@ -27,13 +29,18 @@ export async function getServerSideProps() {
     props: {
       data,
     },
-
   };
 }
 
 const Beers = ({ data } : Beer[]) => {
   const [view, setView] = useState<ViewType>(BeerView.grid);
+  const [page, setPage] = useState(1);
 
+  const handlePageChange = (e, p) => {
+    setPage(p);
+    console.log(page);
+  };
+  beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
   const triggerTableView = () => {
     if (view === BeerView.grid) {
       setView(BeerView.table);
@@ -42,7 +49,9 @@ const Beers = ({ data } : Beer[]) => {
     }
   };
 
-  console.log(data);
+  useEffect(() => {
+
+  }, []);
 
   return (
     <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
@@ -78,6 +87,12 @@ const Beers = ({ data } : Beer[]) => {
       </Box>
       {view === 'grid' ? <GridView beers={data} /> : <TableView beers={data} />}
       {data.length === 0 && <Typography>No Beers</Typography>}
+      <Pagination sx={{ display: 'flex', justifyContent: 'center' }} size="large" count={10} onChange={handlePageChange} />
+      <p>
+        page is
+        {' '}
+        {page}
+      </p>
     </Box>
   );
 };
