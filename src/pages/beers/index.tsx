@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { get } from 'lodash';
 import Box from '@mui/material/Box';
@@ -18,7 +18,16 @@ const Beers = ({ data } : Beer[]) => {
   const [page, setPage] = useState(1);
   const [beers, setBeers] = useState<Beer[]>();
 
-  const getBeers = async () => {
+  // const getBeers = async () => {
+  //   const beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
+  //   try {
+  //     const allBeers = await axios.get(beerUrl);
+  //     setBeers(allBeers.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  const getBeers = useCallback(async () => {
     const beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
     try {
       const allBeers = await axios.get(beerUrl);
@@ -26,11 +35,11 @@ const Beers = ({ data } : Beer[]) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [page]);
 
   useEffect(() => {
     getBeers();
-  }, [page]);
+  }, [getBeers]);
 
   const handlePageChange = (e:object, p:number) => {
     setPage(p);
