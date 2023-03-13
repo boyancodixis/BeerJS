@@ -18,22 +18,13 @@ const Beers = ({ data } : Beer[]) => {
   const [page, setPage] = useState(1);
   const [beers, setBeers] = useState<Beer[]>();
 
-  // const getBeers = async () => {
-  //   const beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
-  //   try {
-  //     const allBeers = await axios.get(beerUrl);
-  //     setBeers(allBeers.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const getBeers = useCallback(async () => {
     const beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
     try {
       const allBeers = await axios.get(beerUrl);
       setBeers(allBeers.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, [page]);
 
