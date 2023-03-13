@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import type { Beer } from '@/types';
 
-const GridView = ({ beers } : Beer[]) => (
+const GridView = ({ beerData } : Beer[]) => (
   <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
     <Box sx={{ display: 'flex' }} />
     <Grid
@@ -19,11 +19,17 @@ const GridView = ({ beers } : Beer[]) => (
       columns={{ xs: 4, sm: 8, md: 12 }}
       spacing={{ xs: 2, md: 4 }}
     >
-      {beers.map((beer: Beer) => (
+      {beerData?.map((beer: Beer) => (
         <Grid item key={beer.id} xs={12} sm={6} md={4}>
           <Card
             sx={{
-              height: '30rem', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', padding: '2rem', boxShadow: 3,
+              height: '30rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              padding: '2rem',
+              boxShadow: 3,
             }}
           >
             <Image width={50} height={190} src={beer.image_url} alt="beer" />
