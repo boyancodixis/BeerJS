@@ -13,34 +13,25 @@ import GridView from '../../components/GridView';
 import TableView from '../../components/TableView';
 import ViewSwitch from '../../components/ViewSwitch';
 
-let beerUrl = 'https://api.punkapi.com/v2/beers?page=1&per_page=10';
-
-export async function getServerSideProps() {
-  let beerData = [];
-  try {
-    beerData = await axios.get(beerUrl);
-  } catch (error) {
-    console.error(error);
-  }
-
-  const data = get(beerData, 'data', []);
-
-  return {
-    props: {
-      data,
-    },
-  };
-}
-
 const Beers = ({ data } : Beer[]) => {
   const [view, setView] = useState<ViewType>(BeerView.grid);
   const [page, setPage] = useState(1);
+  const [beers, setBeers] = useState<Beer[]>();
+
+  const beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
+  const getBeers = async () => {
+    const allBeers = await axios.get(beerUrl);
+    setBeers(allBeers.data);
+  };
+
+  useEffect(() => {
+    getBeers();
+  }, [page]);
 
   const handlePageChange = (e, p) => {
     setPage(p);
-    console.log(page);
   };
-  beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
+
   const triggerTableView = () => {
     if (view === BeerView.grid) {
       setView(BeerView.table);
@@ -48,10 +39,6 @@ const Beers = ({ data } : Beer[]) => {
       setView(BeerView.grid);
     }
   };
-
-  useEffect(() => {
-
-  }, []);
 
   return (
     <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
@@ -85,9 +72,9 @@ const Beers = ({ data } : Beer[]) => {
           <Typography sx={{ marginTop: '.5rem' }}>Table View</Typography>
         </Box>
       </Box>
-      {view === 'grid' ? <GridView beers={data} /> : <TableView beers={data} />}
-      {data.length === 0 && <Typography>No Beers</Typography>}
-      <Pagination sx={{ display: 'flex', justifyContent: 'center' }} size="large" count={10} onChange={handlePageChange} />
+      {view === 'grid' ? <GridView beerData={beers} /> : <TableView beerData={beers} />}
+      {beers?.length === 0 && <Typography>No Beers</Typography>}
+      <Pagination sx={{ display: 'flex', justifyContent: 'center' }} size="large" count={beers?.length} onChange={handlePageChange} />
       <p>
         page is
         {' '}

@@ -7,11 +7,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
+// import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import type { Beer } from '@/types';
 
-const TableView = ({ beers } : Beer[]) => (
+const TableView = ({ beerData } : Beer[]) => (
   <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
     <TableContainer sx={{ boxShadow: 3 }} component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -25,7 +25,7 @@ const TableView = ({ beers } : Beer[]) => (
           </TableRow>
         </TableHead>
         <TableBody>
-          {beers.map((beer:Beer) => (
+          {beerData.map((beer:Beer) => (
             <TableRow key={beer.id}>
               <TableCell align="right">{beer.id}</TableCell>
               <TableCell align="center"><Link href={`/beers/${beer.id}`}>{beer.name}</Link></TableCell>
@@ -37,7 +37,7 @@ const TableView = ({ beers } : Beer[]) => (
         </TableBody>
       </Table>
       <TableFooter>
-        <TablePagination rowsPerPageOptions={[5, 10, 25]} page={0} count={beers.length} />
+        {/* <TablePagination rowsPerPageOptions={[5, 10, 25]} page={0} count={beers.length} /> */}
       </TableFooter>
     </TableContainer>
   </Box>
