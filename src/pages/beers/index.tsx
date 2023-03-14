@@ -33,7 +33,7 @@ const Beers = ({ data } : Beer[]) => {
   }, [page]);
 
   const getBeersByName = async () => {
-    const beerNameUrl = `https://api.punkapi.com/v2/beers?beer_name=${beerName}`;
+    const beerNameUrl = `https://api.punkapi.com/v2/beers?beer_name=${beerName}&per_page=10`;
     try {
       const allBeers = await axios.get(beerNameUrl);
       setBeers(allBeers.data);
