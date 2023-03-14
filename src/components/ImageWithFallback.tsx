@@ -5,7 +5,6 @@ import fallbackImage from '../assets/keg.png';
 export type FallbackImage = {
   src: string,
   fallbackSrc: string,
-
 };
 
 const ImageWithFallback = (props:FallbackImage) => {

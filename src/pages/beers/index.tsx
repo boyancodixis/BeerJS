@@ -81,7 +81,6 @@ const Beers = ({ data } : Beer[]) => {
       setView(BeerView.grid);
     }
   };
-  console.log(beerName);
 
   return (
     <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
@@ -122,8 +121,15 @@ const Beers = ({ data } : Beer[]) => {
         </Box>
       </Box>
       {view === 'grid' ? <GridView beerData={beers} /> : <TableView beerData={beers} />}
-      {beers?.length === 0 && <Typography>No Beers</Typography>}
-      {isPaginationVisible && <Pagination sx={{ display: 'flex', justifyContent: 'center' }} size="large" count={beers?.length} onChange={handlePageChange} />}
+
+      {beers?.length === 0 && (
+      <Typography>No Beers</Typography>
+      )}
+
+      {isPaginationVisible && (
+      <Pagination sx={{ display: 'flex', justifyContent: 'center' }} size="large" count={beers?.length} onChange={handlePageChange} />
+      )}
+
     </Box>
   );
 };
