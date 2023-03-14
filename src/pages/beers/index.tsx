@@ -18,8 +18,8 @@ const Beers = ({ data } : Beer[]) => {
   const [view, setView] = useState<ViewType>(BeerView.grid);
   const [page, setPage] = useState(1);
   const [isPaginationVisible, setIsPaginationVisible] = useState(true);
-  const [beerName, setBeerName] = useState<Beer[]>();
-  const [beers, setBeers] = useState([]);
+  const [beerName, setBeerName] = useState();
+  const [beers, setBeers] = useState<Beer[]>();
 
   const getBeers = useCallback(async () => {
     const beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
