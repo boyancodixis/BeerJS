@@ -108,4 +108,10 @@ export type Beer = {
   contributed_by: string
 };
 
+export type FallbackImage = {
+  src: string,
+  fallbackSrc: string,
+
+};
+
 export type ViewType = 'grid' | 'table';
