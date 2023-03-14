@@ -48,7 +48,7 @@ const Beers = ({ data } : Beer[]) => {
   };
 
   const renderResetButton = useCallback(() => {
-    if (beerName !== undefined || beerName === '') {
+    if (beerName !== undefined) {
       setIsButtonVisible(true);
     } else {
       setIsButtonVisible(false);
@@ -68,8 +68,10 @@ const Beers = ({ data } : Beer[]) => {
   };
 
   const handleReset = () => {
+    getBeers();
     setBeerName('');
-    // setIsButtonVisible(false);
+    setIsButtonVisible(false);
+    setIsPaginationVisible(true);
   };
 
   const triggerTableView = () => {
