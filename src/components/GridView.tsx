@@ -35,7 +35,14 @@ const GridView = ({ beerData } : Beer[]) => (
               boxShadow: 3,
             }}
           >
-            <ImageWithFallback key={beer.id} fallbackSrc={fallbackImage} width={50} height={190} src={beer.image_url} alt="beer" />
+            <ImageWithFallback
+              key={beer.id}
+              fallbackSrc={fallbackImage}
+              width={50}
+              height={190}
+              src={beer.image_url}
+              alt="beer"
+            />
             <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
               <Typography gutterBottom variant="h5" fontWeight="bold" component="h2">
                 {beer.name}
