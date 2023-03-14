@@ -17,6 +17,7 @@ import ViewSwitch from '../../components/ViewSwitch';
 const Beers = ({ data } : Beer[]) => {
   const [view, setView] = useState<ViewType>(BeerView.grid);
   const [page, setPage] = useState(1);
+  const [isPaginationVisible, setIsPaginationVisible] = useState(true);
   const [beerName, setBeerName] = useState<Beer[]>();
   const [beers, setBeers] = useState<Beer[]>();
 
@@ -32,14 +33,13 @@ const Beers = ({ data } : Beer[]) => {
 
   const getBeersByName = async () => {
     const beerNameUrl = `https://api.punkapi.com/v2/beers?beer_name=${beerName}`;
-
     try {
       const allBeers = await axios.get(beerNameUrl);
-
       setBeers(allBeers.data);
     } catch (error) {
       console.error(error);
     }
+    setIsPaginationVisible(false);
   };
 
   useEffect(() => {
@@ -94,7 +94,7 @@ const Beers = ({ data } : Beer[]) => {
       </Box>
       {view === 'grid' ? <GridView beerData={beers} /> : <TableView beerData={beers} />}
       {beers?.length === 0 && <Typography>No Beers</Typography>}
-      <Pagination sx={{ display: 'flex', justifyContent: 'center' }} size="large" count={beers?.length} onChange={handlePageChange} />
+      {isPaginationVisible && <Pagination sx={{ display: 'flex', justifyContent: 'center' }} size="large" count={beers?.length} onChange={handlePageChange} />}
     </Box>
   );
 };

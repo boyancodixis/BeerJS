@@ -9,7 +9,7 @@ const ImageWithFallback = (props) => {
   return (
     <Image
       {...rest}
-      src={imgSrc}
+      src={imgSrc || fallbackImage}
       onError={() => {
         setImgSrc(fallbackSrc);
       }}
