@@ -8,8 +8,11 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import type { Beer } from '@/types';
+import ImageWithFallback from './ImageWithFallback';
+import fallbackImage from '../assets/keg.png';
 
 const GridView = ({ beerData } : Beer[]) => (
+
   <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
     <Box sx={{ display: 'flex' }} />
     <Grid
@@ -32,7 +35,7 @@ const GridView = ({ beerData } : Beer[]) => (
               boxShadow: 3,
             }}
           >
-            <Image width={50} height={190} src={beer.image_url} alt="beer" />
+            <ImageWithFallback key={beer.id} fallbackSrc={fallbackImage} width={50} height={190} src={beer.image_url} alt="beer" />
             <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
               <Typography gutterBottom variant="h5" fontWeight="bold" component="h2">
                 {beer.name}

@@ -5,9 +5,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
 import Pagination from '@mui/material/Pagination';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -38,7 +35,8 @@ const Beers = ({ data } : Beer[]) => {
 
     try {
       const allBeers = await axios.get(beerNameUrl);
-      setBeerName(allBeers.data);
+
+      setBeers(allBeers.data);
     } catch (error) {
       console.error(error);
     }
@@ -59,7 +57,6 @@ const Beers = ({ data } : Beer[]) => {
       setView(BeerView.grid);
     }
   };
-  console.log(beerName);
 
   return (
     <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
@@ -76,7 +73,7 @@ const Beers = ({ data } : Beer[]) => {
             variant="outlined"
             onChange={(e) => setBeerName(e.target.value)}
           />
-          <Button type="submit" onClick={getBeersByName} variant="contained" sx={{ marginTop: '.5rem' }}>Search</Button>
+          <Button onClick={getBeersByName} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Search</Button>
         </FormControl>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', float: 'left' }}>
