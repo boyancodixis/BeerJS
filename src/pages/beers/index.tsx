@@ -17,6 +17,7 @@ import ViewSwitch from '../../components/ViewSwitch';
 const Beers = ({ data } : Beer[]) => {
   const [view, setView] = useState<ViewType>(BeerView.grid);
   const [page, setPage] = useState(1);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
   const [isPaginationVisible, setIsPaginationVisible] = useState(true);
   const [beerName, setBeerName] = useState();
   const [beers, setBeers] = useState<Beer[]>();
@@ -36,18 +37,36 @@ const Beers = ({ data } : Beer[]) => {
     try {
       const allBeers = await axios.get(beerNameUrl);
       setBeers(allBeers.data);
-      setIsPaginationVisible(false);
+      if (beerName === '') {
+        setIsPaginationVisible(true);
+      } else {
+        setIsPaginationVisible(false);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
+  const renderResetButton = useCallback(() => {
+    if (beerName !== undefined || beerName === '') {
+      setIsButtonVisible(true);
+    } else {
+      setIsButtonVisible(false);
+    }
+  }, [beerName]);
+
   useEffect(() => {
+    renderResetButton();
     getBeers();
-  }, [getBeers]);
+  }, [getBeers, renderResetButton]);
 
   const handlePageChange = (e:object, p:number) => {
     setPage(p);
+  };
+
+  const resetButton = () => {
+    setBeerName('');
+    setIsButtonVisible(false);
   };
 
   const triggerTableView = () => {
@@ -57,6 +76,7 @@ const Beers = ({ data } : Beer[]) => {
       setView(BeerView.grid);
     }
   };
+  console.log(beerName);
 
   return (
     <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
@@ -69,10 +89,12 @@ const Beers = ({ data } : Beer[]) => {
               width: '100%',
             }}
             id="outlined-basic"
-            label="Outlined"
+            label="Search..."
+            value={beerName}
             variant="outlined"
             onChange={(e) => setBeerName(e.target.value)}
           />
+          {isButtonVisible && <Button onClick={resetButton} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Reset Search</Button>}
           <Button onClick={getBeersByName} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Search</Button>
         </FormControl>
       </Box>
