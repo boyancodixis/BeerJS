@@ -57,16 +57,19 @@ const Beers = ({ data } : Beer[]) => {
 
   useEffect(() => {
     renderResetButton();
+  }, [renderResetButton]);
+
+  useEffect(() => {
     getBeers();
-  }, [getBeers, renderResetButton]);
+  }, [getBeers]);
 
   const handlePageChange = (e:object, p:number) => {
     setPage(p);
   };
 
-  const resetButton = () => {
+  const handleReset = () => {
     setBeerName('');
-    setIsButtonVisible(false);
+    // setIsButtonVisible(false);
   };
 
   const triggerTableView = () => {
@@ -94,7 +97,7 @@ const Beers = ({ data } : Beer[]) => {
             variant="outlined"
             onChange={(e) => setBeerName(e.target.value)}
           />
-          {isButtonVisible && <Button onClick={resetButton} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Reset Search</Button>}
+          {isButtonVisible && <Button onClick={handleReset} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Reset Search</Button>}
           <Button onClick={getBeersByName} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Search</Button>
         </FormControl>
       </Box>
