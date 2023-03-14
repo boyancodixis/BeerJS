@@ -19,7 +19,7 @@ const Beers = ({ data } : Beer[]) => {
   const [page, setPage] = useState(1);
   const [isPaginationVisible, setIsPaginationVisible] = useState(true);
   const [beerName, setBeerName] = useState<Beer[]>();
-  const [beers, setBeers] = useState<Beer[]>();
+  const [beers, setBeers] = useState([]);
 
   const getBeers = useCallback(async () => {
     const beerUrl = `https://api.punkapi.com/v2/beers?page=${page}&per_page=10`;
@@ -36,10 +36,10 @@ const Beers = ({ data } : Beer[]) => {
     try {
       const allBeers = await axios.get(beerNameUrl);
       setBeers(allBeers.data);
+      setIsPaginationVisible(false);
     } catch (error) {
       console.error(error);
     }
-    setIsPaginationVisible(false);
   };
 
   useEffect(() => {
