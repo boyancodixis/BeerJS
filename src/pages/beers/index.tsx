@@ -84,7 +84,15 @@ const Beers = ({ data } : Beer[]) => {
 
   return (
     <Box sx={{ color: 'primary.main', alignContent: 'center', padding: '4rem' }}>
-      <Typography variant="h3" align="center" fontWeight="bold" sx={{ textDecoration: 'underline' }}>Beers</Typography>
+      <Typography
+        variant="h3"
+        align="center"
+        fontWeight="bold"
+        sx={{ textDecoration: 'underline' }}
+      >
+        Beers
+
+      </Typography>
       <Box sx={{ display: 'flex' }}>
         <FormControl>
           <TextField
@@ -99,9 +107,25 @@ const Beers = ({ data } : Beer[]) => {
             onChange={(e) => setBeerName(e.target.value)}
           />
           {isButtonVisible && (
-          <Button onClick={handleReset} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Reset Search</Button>
+          <Button
+            onClick={handleReset}
+            type="submit"
+            variant="contained"
+            sx={{ marginTop: '.5rem' }}
+          >
+            Reset Search
+
+          </Button>
           )}
-          <Button onClick={getBeersByName} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Search</Button>
+          <Button
+            onClick={getBeersByName}
+            type="submit"
+            variant="contained"
+            sx={{ marginTop: '.5rem' }}
+          >
+            Search
+
+          </Button>
         </FormControl>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', float: 'left' }}>
@@ -127,7 +151,15 @@ const Beers = ({ data } : Beer[]) => {
       )}
 
       {isPaginationVisible && (
-      <Pagination sx={{ display: 'flex', justifyContent: 'center' }} size="large" count={beers?.length} onChange={handlePageChange} />
+      <Pagination
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+        size="large"
+        count={beers?.length}
+        onChange={handlePageChange}
+      />
       )}
 
     </Box>
