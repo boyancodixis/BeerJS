@@ -97,7 +97,9 @@ const Beers = ({ data } : Beer[]) => {
             variant="outlined"
             onChange={(e) => setBeerName(e.target.value)}
           />
-          {isButtonVisible && <Button onClick={handleReset} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Reset Search</Button>}
+          {isButtonVisible && (
+          <Button onClick={handleReset} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Reset Search</Button>
+          )}
           <Button onClick={getBeersByName} type="submit" variant="contained" sx={{ marginTop: '.5rem' }}>Search</Button>
         </FormControl>
       </Box>
